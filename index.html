@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+}
+body{
+    height: 100%;
+    width: 100%;
+    background-color: aqua;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.container{
+    
+    width: 650px;
+    background-color: palevioletred;
+    margin-top: 70px;
+    padding: 40px;
+    max-height: 600px;
+   
+
+}
+.container p{
+    
+    font-weight: bolder;
+    font-size: 25px;
+    margin-bottom: 8px;
+
+}
+.container input{
+    width: 100%;
+    height: 50px;
+    border: 2px solid black;
+    outline: 0;
+    padding: 10px;
+    margin: 10px 0 20px;
+    border-radius: 6px;
+    
+}
+.container button{
+    width: 100%;
+    height: 50px;
+    background-color: black;
+    outline: 0;
+    color: aliceblue;
+    font-weight: bolder;
+    border: 0;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 90px;
+    font-size: 20px;
+}
+#img{
+    width: 200px;
+    border-radius: 6px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 1s;
+
+}
+#icon{
+    width: 100%;
+    padding: 10px;
+
+}
+#img.show-img{
+    max-height: 500px;
+    margin: 30px auto;
+    border: 2px solid black;
+}
+.error{
+    animation: shake 0.1s linear 14;
+}
+@keyframes shake{
+    0%{
+        transform: translateX(0);
+    }
+    25%{
+        transform: translateX(-4px);
+    }
+    50%{
+        transform: translateX(0);
+    }
+    75%{
+        transform: translateX(4px);
+    }
+    100%{
+        transform: translateX(0);
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <p>Enter your text or URL</p>
+        <input type="text" placeholder="Text or URL"  id="input">
+        <div id="img">
+            <img src="" id="icon">
+        </div>
+        <button onclick="qrCode()">Generate QR code</button>
+    </div>
+    
+
+
+    <script>
+        let img=document.getElementById("img");
+        let icon=document.getElementById("icon");
+        let input=document.getElementById("input");
+        function qrCode(){
+            if(input.value.length>0){
+                icon.src=" https://api.qrserver.com/v1/create-qr-code/?size=150x150&data= " + input.value;
+                img.classList.add("show-img");
+            }
+            else {
+                input.classList.add("error");
+                setTimeout(()=>{
+                    input.classList.remove("error");
+                },1000);
+            }
+
+        }
+    </script>
+</body>
+</html>
